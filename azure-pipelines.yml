@@ -27,5 +27,7 @@ steps:
 #    npm install
 #    npm run build
 #  displayName: 'npm install and build'
-- script: cd './RestApi/Sepes.RestApi' dotnet build --configuration $(buildConfiguration)
+- script: |
+    cd './RestApi/Sepes.RestApi'
+    dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
