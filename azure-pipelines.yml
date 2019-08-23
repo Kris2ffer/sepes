@@ -31,7 +31,7 @@ steps:
   displayName: 'npm install and build'
   
 - script: |
-    cd './RestApi/'
+    cd './RestApi/Sepes.RestApi.Tests'
     dotnet test
   displayName: 'dotnet test'
   
