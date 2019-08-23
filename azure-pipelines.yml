@@ -30,9 +30,11 @@ steps:
     npm run build
   displayName: 'npm install and build'
   
-- script: |
-    cd './RestApi/Sepes.RestApi.Tests'
-    dotnet test
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
   displayName: 'dotnet test'
   
 - script: |
