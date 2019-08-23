@@ -29,6 +29,12 @@ steps:
     CI=true npm test
     npm run build
   displayName: 'npm install and build'
+  
+- script: |
+    cd './RestApi/'
+    dotnet test
+  displayName: 'dotnet test'
+  
 - script: |
     cd './RestApi/Sepes.RestApi'
     dotnet build --configuration $(buildConfiguration)
