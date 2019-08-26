@@ -19,6 +19,11 @@ variables:
 
 steps:
 - script: |
+    cd './RestApi/Sepes.RestApi'
+    dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- script: |
     cd './RestApi/Sepes.RestApi.Tests/'
     dotnet test
   displayName: 'dotnet test'
