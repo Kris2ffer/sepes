@@ -23,7 +23,8 @@ steps:
     dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: |
-    cd './RestApi/Sepes.RestApi.Tests/'
-    dotnet test
-  displayName: 'dotnet test'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'RestApi/**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
