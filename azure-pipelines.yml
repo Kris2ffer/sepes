@@ -18,27 +18,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-# Install required tools
-- task: DotNetCoreInstaller@0
-  inputs:
-    version: '2.2.401'
 
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-
-### BackEnd Rest API build and test
-- script: |
-    cd './RestApi/Sepes.RestApi'
-    dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: 'RestApi/**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
 
 ### FrontEnd test and build
 - script: |
@@ -47,3 +31,11 @@ steps:
     CI=true npm test
     npm run build
   displayName: 'npm install and build'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
